@@ -3,29 +3,135 @@
 <head>
 <meta charset="UTF-8">
 <title>Inspection Form — 45 Fields</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
-    body { font-family: Arial; padding: 20px; max-width: 900px; margin: auto; }
-    label { font-weight: 600; display:block; margin-top:10px; }
-    input, select, textarea { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
-    textarea { min-height: 60px; resize:vertical; }
-    .buttons { margin-top: 12px; }
-    button { padding: 10px 14px; margin-right: 8px; cursor: pointer; }
-    .row-box { background: #f7f7f7; padding: 10px; margin-top: 8px; border-radius: 6px; }
-    .row-header { display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:12px; }
-    .row-left { display:flex; align-items:center; gap:8px; }
-    .arrow { width:20px; display:inline-block; text-align:center; }
-    .edit-btn { padding:6px 10px; }
-    .details { background:#fff; margin-top:8px; padding:10px; border-radius:6px; display:none; white-space:pre-wrap; }
-    .field-line { margin-bottom:6px; }
-    .small { font-size:0.9em; color:#555; }
+    /* Global Styles for Responsiveness */
+    body { 
+        font-family: Arial, sans-serif; 
+        padding: 10px; /* Kurangkan padding untuk skrin kecil */
+        max-width: 900px; 
+        margin: auto; 
+    }
+    
+    /* Ensure form elements are readable and full width */
+    label { 
+        font-weight: 600; 
+        display: block; 
+        margin-top: 15px; /* Lebih banyak ruang untuk label */
+        margin-bottom: 3px;
+    }
+    input, select, textarea { 
+        width: 100%; 
+        padding: 12px; /* Lebih banyak padding untuk mudah sentuh */
+        margin: 4px 0; 
+        box-sizing: border-box; 
+        font-size: 16px; /* Saiz fon yang mencukupi untuk mudah alih */
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    textarea { 
+        min-height: 80px; /* Tingkatkan ketinggian minimum */
+        resize: vertical; 
+    }
+
+    /* Button Styles */
+    .buttons { 
+        margin-top: 20px; 
+        display: flex; /* Guna flexbox untuk butang */
+        flex-direction: column; /* Susun butang secara menegak secara lalai */
+        gap: 10px; /* Ruang antara butang */
+    }
+    button { 
+        padding: 12px; /* Lebih banyak padding untuk butang mudah sentuh */
+        width: 100%; /* Butang ambil lebar penuh pada skrin kecil */
+        margin: 0; /* Alih keluar margin kanan lalai */
+        cursor: pointer; 
+        font-size: 16px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    
+    /* Saved List Styles */
+    .row-box { 
+        background: #f7f7f7; 
+        padding: 10px; 
+        margin-top: 8px; 
+        border-radius: 6px; 
+        border: 1px solid #eee;
+    }
+    .row-header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        cursor: pointer; 
+        gap: 12px; 
+        flex-wrap: wrap; /* Benarkan pembungkusan jika ruang kecil */
+    }
+    .row-left { 
+        display: flex; 
+        align-items: center; 
+        gap: 8px; 
+        /* Benarkan ruang nama pelanggan untuk mengambil ruang yang diperlukan */
+        flex-basis: auto; 
+        min-width: 0; /* Mesti ada untuk flexbox */
+    }
+    .arrow { 
+        width: 20px; 
+        display: inline-block; 
+        text-align: center; 
+        flex-shrink: 0; /* Elakkan anak panah daripada mengecil */
+    }
+    .edit-btn { 
+        padding: 8px 12px; /* Tingkatkan saiz edit button */
+        font-size: 14px;
+        flex-shrink: 0; /* Elakkan butang daripada mengecil */
+    }
+    .details { 
+        background: #fff; 
+        margin-top: 10px; 
+        padding: 10px; 
+        border-radius: 6px; 
+        display: none; 
+        white-space: pre-wrap; 
+        border: 1px solid #ddd;
+    }
+    .field-line { 
+        margin-bottom: 8px; 
+        padding-bottom: 4px;
+        border-bottom: 1px dotted #eee; /* Garisan untuk memisahkan medan */
+    }
+    .small { 
+        font-size: 0.9em; 
+        color: #555; 
+        display: block; /* Label (small) ambil baris penuh */
+    }
+
+    /* Media Query for Larger Screens (Desktop/Tablet) */
+    /* Apabila lebar skrin melebihi 600px, butang diletakkan bersebelahan */
+    @media (min-width: 600px) {
+        .buttons {
+            flex-direction: row;
+        }
+        button {
+            width: auto; /* Kembalikan lebar auto untuk desktop */
+        }
+        .row-header {
+            flex-wrap: nowrap; /* Jangan bungkus pada desktop */
+        }
+    }
+
 </style>
 </head>
 <body>
 
 <h2>Inspection Form — 45 Fields</h2>
 
-<!-- FORM -->
 <div id="formArea">
     <label>No (Auto):</label>
     <input type="text" id="no" readonly>
