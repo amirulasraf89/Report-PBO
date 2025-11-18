@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<title>Inspection Form — 45 Fields</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<style>
+    body { font-family: Arial; padding: 20px; max-width: 900px; margin: auto; }
+    label { font-weight: 600; display:block; margin-top:10px; }
+    input, select, textarea { width: 100%; padding: 8px; margin: 6px 0; box-sizing: border-box; }
+    textarea { min-height: 60px; resize:vertical; }
+    .buttons { margin-top: 12px; }
+    button { padding: 10px 14px; margin-right: 8px; cursor: pointer; }
+    .row-box { background: #f7f7f7; padding: 10px; margin-top: 8px; border-radius: 6px; }
+    .row-header { display:flex; justify-content:space-between; align-items:center; cursor:pointer; gap:12px; }
+    .row-left { display:flex; align-items:center; gap:8px; }
+    .arrow { width:20px; display:inline-block; text-align:center; }
+    .edit-btn { padding:6px 10px; }
+    .details { background:#fff; margin-top:8px; padding:10px; border-radius:6px; display:none; white-space:pre-wrap; }
+    .field-line { margin-bottom:6px; }
+    .small { font-size:0.9em; color:#555; }
+</style>
+</head>
+<body>
+
+<h2>Inspection Form — 45 Fields</h2>
+
+<!-- FORM -->
+<div id="formArea">
+    <label>No (Auto):</label>
+    <input type="text" id="no" readonly>
+
+    <label>1. Inspection Date</label>
+    <input type="date" id="inspection_date">
+
+    <label>2. Inspection Time</label>
+    <input type="time" id="inspection_time">
+
+    <label>3. Tarikh Serahan Notis Pemotongan</label>
+    <input type="date" id="notis_date">
+
+    <label>4. State</label>
+    <input type="text" id="state">
+
+    <label>5. Station Code</label>
+    <input type="text" id="station_code">
+
+    <label>6. Contract Account No.</label>
+    <input type="text" id="contract_account_no">
+
+    <label>7. Customer Name</label>
+    <input type="text" id="customer_name">
+
+    <label>8. Customer Type</label>
+    <input type="text" id="customer_type">
+
+    <label>9. Tariff</label>
+    <input type="text" id="tariff">
+
+    <label>10. Premise Address</label>
+    <textarea id="premise_address"></textarea>
+
+    <label>11. Anomaly (Type)</label>
+    <input type="text" id="anomaly_type">
+
+    <label>12. Installation No.</label>
+    <input type="text" id="installation_no">
+
+    <label>13. GPS Coordinate</label>
+    <input type="text" id="gps_coordinate" placeholder="lat, long">
+
+    <label>14. Manufact No.</label>
+    <input type="text" id="manufact_no">
+
+    <label>15. Meter Brand</label>
+    <input type="text" id="meter_brand">
+
+    <label>16. Meter Description</label>
+    <input type="text" id="meter_description">
+
+    <label>17. CT Ratio</label>
+    <input type="text" id="ct_ratio">
+
+    <label>18. Meter Installation Date</label>
+    <input type="date" id="meter_installation_date">
+
+    <label>19. Error</label>
+    <input type="text" id="error_field">
+
+    <label>20. Testing Method</label>
+    <input type="text" id="testing_method">
+
+    <label>21. Technical Action</label>
+    <input type="text" id="technical_action">
+
+    <label>22. Replace Meter Manufact No.</label>
+    <input type="text" id="replace_manufact_no">
+
+    <label>23. Replace Meter Brand</label>
+    <input type="text" id="replace_meter_brand">
+
+    <label>24. Meter Category</label>
+    <input type="text" id="meter_category">
+
+    <label>25. Remarks</label>
+    <textarea id="remarks"></textarea>
+
+    <label>26. Jenis Premis</label>
+    <input type="text" id="jenis_premis">
+
+    <label>27. Cause</label>
+    <input type="text" id="cause">
+
+    <label>28. Action Camera</label>
+    <input type="text" id="action_camera">
+
+    <label>29. Service Request ID</label>
+    <input type="text" id="service_request_id">
+
+    <label>30. Project Type</label>
+    <input type="text" id="project_type">
+
+    <label>31. HRC</label>
+    <input type="text" id="hrc">
+
+    <label>32. Meter Send To Lab</label>
+    <input type="text" id="meter_send_to_lab">
+
+    <label>33. Meter Changed Status</label>
+    <input type="text" id="meter_changed_status">
+
+    <label>34. No Of Team</label>
+    <input type="number" id="no_of_team" min="0">
+
+    <label>35. Team Leader</label>
+    <input type="text" id="team_leader">
+
+    <label>36. Team Member 1</label>
+    <input type="text" id="team_member_1">
+
+    <label>37. Team Member 2</label>
+    <input type="text" id="team_member_2">
+
+    <label>38. Team Member 3</label>
+    <input type="text" id="team_member_3">
+
+    <label>39. Case ID No</label>
+    <input type="text" id="case_id_no">
+
+    <label>40. Service Notification (S/N) No</label>
+    <input type="text" id="service_notification_no">
+
+    <label>41. Inspection Result</label>
+    <input type="text" id="inspection_result">
+
+    <label>42. Disconnection Date</label>
+    <input type="date" id="disconnection_date">
+
+    <label>43. Status</label>
+    <input type="text" id="status_field">
+
+    <label>44. Testing Method (Remarks)</label>
+    <textarea id="testing_method_remarks"></textarea>
+
+    <div class="buttons">
+        <button onclick="saveEntry()">Save Entry</button>
+        <button onclick="downloadExcel()">Download Excel</button>
+        <button onclick="clearSaved()">Clear Saved List</button>
+    </div>
+</div>
+
+<h3>Data Saved:</h3>
+<div id="savedList"></div>
+
+<script>
+/* --- data store --- */
+let entries = [];
+let editingIndex = null;
+
+/* --- on load: restore from localStorage --- */
+window.onload = function() {
+    const saved = localStorage.getItem("inspection_data_45");
+    if (saved) {
+        entries = JSON.parse(saved);
+        renderList();
+    }
+    updateAutoNumber();
+};
+
+/* --- helper: all field ids in correct order for Excel / storage --- */
+const fieldIds = [
+  "no",
+  "inspection_date",
+  "inspection_time",
+  "notis_date",
+  "state",
+  "station_code",
+  "contract_account_no",
+  "customer_name",
+  "customer_type",
+  "tariff",
+  "premise_address",
+  "anomaly_type",
+  "installation_no",
+  "gps_coordinate",
+  "manufact_no",
+  "meter_brand",
+  "meter_description",
+  "ct_ratio",
+  "meter_installation_date",
+  "error_field",
+  "testing_method",
+  "technical_action",
+  "replace_manufact_no",
+  "replace_meter_brand",
+  "meter_category",
+  "remarks",
+  "jenis_premis",
+  "cause",
+  "action_camera",
+  "service_request_id",
+  "project_type",
+  "hrc",
+  "meter_send_to_lab",
+  "meter_changed_status",
+  "no_of_team",
+  "team_leader",
+  "team_member_1",
+  "team_member_2",
+  "team_member_3",
+  "case_id_no",
+  "service_notification_no",
+  "inspection_result",
+  "disconnection_date",
+  "status_field",
+  "testing_method_remarks"
+];
+
+/* --- update No field shown in form --- */
+function updateAutoNumber() {
+    document.getElementById("no").value = editingIndex !== null ? entries[editingIndex].no : entries.length + 1;
+}
+
+/* --- read form into object --- */
+function readForm() {
+    const obj = {};
+    fieldIds.forEach(id => {
+        const el = document.getElementById(id);
+        obj[id] = el ? el.value : "";
+    });
+    return obj;
+}
+
+/* --- write object into form (for edit) --- */
+function writeForm(obj) {
+    fieldIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = obj[id] || "";
+    });
+}
+
+/* --- clear all form fields except NO gets auto updated after clear --- */
+function clearForm() {
+    fieldIds.forEach(id => {
+        if (id !== "no") {
+            const el = document.getElementById(id);
+            if (el) el.value = "";
+        }
+    });
+    editingIndex = null;
+    updateAutoNumber();
+}
+
+/* --- save entry (new or update) --- */
+function saveEntry() {
+    const entry = readForm();
+
+    // ensure No is string or number - keep whatever stored
+    if (editingIndex !== null) {
+        entries[editingIndex] = entry;
+        editingIndex = null;
+    } else {
+        // set no as entries.length+1 (string)
+        entry.no = String(entries.length + 1);
+        entries.push(entry);
+    }
+
+    persist();
+    renderList();
+    clearForm();
+}
+
+/* --- persist to localStorage --- */
+function persist() {
+    localStorage.setItem("inspection_data_45", JSON.stringify(entries));
+}
+
+/* --- render saved list with expand/collapse and edit button --- */
+function renderList() {
+    const container = document.getElementById("savedList");
+    let html = "";
+
+    entries.forEach((e, i) => {
+        // build details display — show label: value pairs
+        let detailsHtml = "";
+        // start from index 1 because fieldIds[0] is 'no' and already visible
+        for (let j = 1; j < fieldIds.length; j++) {
+            const id = fieldIds[j];
+            const labelText = getLabelById(id);
+            const value = e[id] !== undefined && e[id] !== "" ? e[id] : "—";
+            detailsHtml += `<div class="field-line"><span class="small"><b>${labelText}:</b></span> ${escapeHtml(value)}</div>`;
+        }
+
+        html += `
+        <div class="row-box">
+            <div class="row-header" onclick="toggleDetails(${i})">
+                <div class="row-left">
+                    <span class="arrow" id="arrow_${i}">▶</span>
+                    <div><b>${escapeHtml(e.no || String(i+1))}</b> — ${escapeHtml(e.customer_name || "(no name)")}</div>
+                </div>
+                <div>
+                    <button class="edit-btn" onclick="event.stopPropagation(); editEntry(${i});">Edit</button>
+                </div>
+            </div>
+
+            <div class="details" id="detail_${i}">
+                ${detailsHtml}
+            </div>
+        </div>`;
+    });
+
+    container.innerHTML = html;
+    updateAutoNumber();
+}
+
+/* --- mapping id -> readable label (keeps original order) --- */
+function getLabelById(id) {
+    const labels = {
+        "inspection_date":"Inspection Date",
+        "inspection_time":"Inspection Time",
+        "notis_date":"Tarikh Serahan Notis Pemotongan",
+        "state":"State",
+        "station_code":"Station Code",
+        "contract_account_no":"Contract Account No.",
+        "customer_name":"Customer Name",
+        "customer_type":"Customer Type",
+        "tariff":"Tariff",
+        "premise_address":"Premise Address",
+        "anomaly_type":"Anomaly (Type)",
+        "installation_no":"Installation No.",
+        "gps_coordinate":"GPS Coordinate",
+        "manufact_no":"Manufact No.",
+        "meter_brand":"Meter Brand",
+        "meter_description":"Meter Description",
+        "ct_ratio":"CT Ratio",
+        "meter_installation_date":"Meter Installation Date",
+        "error_field":"Error",
+        "testing_method":"Testing Method",
+        "technical_action":"Technical Action",
+        "replace_manufact_no":"Replace Meter Manufact No.",
+        "replace_meter_brand":"Replace Meter Brand",
+        "meter_category":"Meter Category",
+        "remarks":"Remarks",
+        "jenis_premis":"Jenis Premis",
+        "cause":"Cause",
+        "action_camera":"Action Camera",
+        "service_request_id":"Service Request ID",
+        "project_type":"Project Type",
+        "hrc":"HRC",
+        "meter_send_to_lab":"Meter Send To Lab",
+        "meter_changed_status":"Meter Changed Status",
+        "no_of_team":"No Of Team",
+        "team_leader":"Team Leader",
+        "team_member_1":"Team Member 1",
+        "team_member_2":"Team Member 2",
+        "team_member_3":"Team Member 3",
+        "case_id_no":"Case ID No",
+        "service_notification_no":"Service Notification (S/N) No",
+        "inspection_result":"Inspection Result",
+        "disconnection_date":"Disconnection Date",
+        "status_field":"Status",
+        "testing_method_remarks":"Testing Method (Remarks)"
+    };
+    return labels[id] || id;
+}
+
+/* --- toggle expand / collapse details --- */
+function toggleDetails(index) {
+    const detail = document.getElementById("detail_" + index);
+    const arrow = document.getElementById("arrow_" + index);
+    if (!detail) return;
+    if (detail.style.display === "block") {
+        detail.style.display = "none";
+        if (arrow) arrow.textContent = "▶";
+    } else {
+        detail.style.display = "block";
+        if (arrow) arrow.textContent = "▼";
+    }
+}
+
+/* --- edit entry: load into form and set editingIndex --- */
+function editEntry(index) {
+    editingIndex = index;
+    const obj = entries[index];
+    if (!obj) return;
+    writeForm(obj);
+    // ensure NO shows the stored no and not auto incremented
+    document.getElementById("no").value = obj.no || String(index + 1);
+    // scroll to top so user sees the form
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* --- clear saved entries --- */
+function clearSaved() {
+    if (!confirm("Clear all saved entries?")) return;
+    entries = [];
+    localStorage.removeItem("inspection_data_45");
+    renderList();
+}
+
+/* --- download Excel with all 45 columns --- */
+function downloadExcel() {
+    const wb = XLSX.utils.book_new();
+
+    // Headers in the same order as you requested (1..45)
+    const headers = [
+      "No",
+      "Inspection Date",
+      "Inspection Time",
+      "Tarikh Serahan Notis Pemotongan",
+      "State",
+      "Station Code",
+      "Contract Account No.",
+      "Customer Name",
+      "Customer Type",
+      "Tariff",
+      "Premise Address",
+      "Anomaly (Type)",
+      "Installation No.",
+      "GPS Coordinate",
+      "Manufact No.",
+      "Meter Brand",
+      "Meter Description",
+      "CT Ratio",
+      "Meter Installation Date",
+      "Error",
+      "Testing Method",
+      "Technical Action",
+      "Replace Meter Manufact No.",
+      "Replace Meter Brand",
+      "Meter Category",
+      "Remarks",
+      "Jenis Premis",
+      "Cause",
+      "Action Camera",
+      "Service Request ID",
+      "Project Type",
+      "HRC",
+      "Meter Send To Lab",
+      "Meter Changed Status",
+      "No Of Team",
+      "Team Leader",
+      "Team Member 1",
+      "Team Member 2",
+      "Team Member 3",
+      "Case ID No",
+      "Service Notification (S/N) No",
+      "Inspection Result",
+      "Disconnection Date",
+      "Status",
+      "Testing Method (Remarks)"
+    ];
+
+    const ws_data = [headers];
+
+    entries.forEach(e => {
+        const row = fieldIds.map(id => e[id] !== undefined ? e[id] : "");
+        ws_data.push(row);
+    });
+
+    const ws = XLSX.utils.aoa_to_sheet(ws_data);
+    ws["!ref"] = "A1:" + XLSX.utils.encode_cell({ c: headers.length - 1, r: ws_data.length - 1 });
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+    XLSX.writeFile(wb, "inspection_data_45.xlsx");
+}
+
+/* --- utility: escape HTML to avoid injection in display (safe) --- */
+function escapeHtml(text) {
+    if (!text && text !== 0) return "";
+    return String(text)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+}
+</script>
+
+</body>
+</html>
