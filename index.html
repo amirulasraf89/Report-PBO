@@ -2,14 +2,14 @@
 <html lang="ms">
 <head>
 <meta charset="UTF-8">
-<title>Inspection Form — 45 Fields</title>
+<title>Inspection Form — 45 Fields (UPPERCASE)</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <style>
     /* Global Styles for Responsiveness */
     body { 
         font-family: Arial, sans-serif; 
-        padding: 10px; /* Kurangkan padding untuk skrin kecil */
+        padding: 10px;
         max-width: 900px; 
         margin: auto; 
     }
@@ -18,34 +18,35 @@
     label { 
         font-weight: 600; 
         display: block; 
-        margin-top: 15px; /* Lebih banyak ruang untuk label */
+        margin-top: 15px;
         margin-bottom: 3px;
     }
     input, select, textarea { 
         width: 100%; 
-        padding: 12px; /* Lebih banyak padding untuk mudah sentuh */
+        padding: 12px;
         margin: 4px 0; 
         box-sizing: border-box; 
-        font-size: 16px; /* Saiz fon yang mencukupi untuk mudah alih */
+        font-size: 16px;
         border: 1px solid #ccc;
         border-radius: 4px;
-    }
+        /* >>> PERUBAHAN UTAMA UNTUK HURUF BESAR <<< */
+        **text-transform: uppercase;** }
     textarea { 
-        min-height: 80px; /* Tingkatkan ketinggian minimum */
+        min-height: 80px;
         resize: vertical; 
     }
 
     /* Button Styles */
     .buttons { 
         margin-top: 20px; 
-        display: flex; /* Guna flexbox untuk butang */
-        flex-direction: column; /* Susun butang secara menegak secara lalai */
-        gap: 10px; /* Ruang antara butang */
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
     }
     button { 
-        padding: 12px; /* Lebih banyak padding untuk butang mudah sentuh */
-        width: 100%; /* Butang ambil lebar penuh pada skrin kecil */
-        margin: 0; /* Alih keluar margin kanan lalai */
+        padding: 12px;
+        width: 100%;
+        margin: 0;
         cursor: pointer; 
         font-size: 16px;
         border: none;
@@ -64,33 +65,33 @@
         margin-top: 8px; 
         border-radius: 6px; 
         border: 1px solid #eee;
-    }
+        /* >>> PERUBAHAN UTAMA UNTUK HURUF BESAR PADA OUTPUT TERSIMPAN <<< */
+        **text-transform: uppercase;** }
     .row-header { 
         display: flex; 
         justify-content: space-between; 
         align-items: center; 
         cursor: pointer; 
         gap: 12px; 
-        flex-wrap: wrap; /* Benarkan pembungkusan jika ruang kecil */
+        flex-wrap: wrap;
     }
     .row-left { 
         display: flex; 
         align-items: center; 
         gap: 8px; 
-        /* Benarkan ruang nama pelanggan untuk mengambil ruang yang diperlukan */
         flex-basis: auto; 
-        min-width: 0; /* Mesti ada untuk flexbox */
+        min-width: 0;
     }
     .arrow { 
         width: 20px; 
         display: inline-block; 
         text-align: center; 
-        flex-shrink: 0; /* Elakkan anak panah daripada mengecil */
+        flex-shrink: 0;
     }
     .edit-btn { 
-        padding: 8px 12px; /* Tingkatkan saiz edit button */
+        padding: 8px 12px;
         font-size: 14px;
-        flex-shrink: 0; /* Elakkan butang daripada mengecil */
+        flex-shrink: 0;
     }
     .details { 
         background: #fff; 
@@ -104,25 +105,24 @@
     .field-line { 
         margin-bottom: 8px; 
         padding-bottom: 4px;
-        border-bottom: 1px dotted #eee; /* Garisan untuk memisahkan medan */
+        border-bottom: 1px dotted #eee;
     }
     .small { 
         font-size: 0.9em; 
         color: #555; 
-        display: block; /* Label (small) ambil baris penuh */
+        display: block;
     }
 
     /* Media Query for Larger Screens (Desktop/Tablet) */
-    /* Apabila lebar skrin melebihi 600px, butang diletakkan bersebelahan */
     @media (min-width: 600px) {
         .buttons {
             flex-direction: row;
         }
         button {
-            width: auto; /* Kembalikan lebar auto untuk desktop */
+            width: auto;
         }
         .row-header {
-            flex-wrap: nowrap; /* Jangan bungkus pada desktop */
+            flex-wrap: nowrap;
         }
     }
 
@@ -130,170 +130,170 @@
 </head>
 <body>
 
-<h2>Inspection Form — 45 Fields</h2>
+<h2>INSPECTION FORM — 45 FIELDS</h2>
 
 <div id="formArea">
-    <label>No (Auto):</label>
+    <label>NO (AUTO):</label>
     <input type="text" id="no" readonly>
 
-    <label>1. Inspection Date</label>
+    <label>1. INSPECTION DATE</label>
     <input type="date" id="inspection_date">
 
-    <label>2. Inspection Time</label>
+    <label>2. INSPECTION TIME</label>
     <input type="time" id="inspection_time">
 
-    <label>3. Tarikh Serahan Notis Pemotongan</label>
+    <label>3. TARIKH SERAHAN NOTIS PEMOTONGAN</label>
     <input type="date" id="notis_date">
 
-    <label>4. State</label>
+    <label>4. STATE</label>
 <select id="state">
-    <option value="">-- Select State --</option>
-    <option value="Johor">Johor</option>
-    <option value="Kedah">Kedah</option>
-    <option value="Kelantan">Kelantan</option>
-    <option value="Melaka">Melaka</option>
-    <option value="Negeri Sembilan">Negeri Sembilan</option>
-    <option value="Pahang">Pahang</option>
-    <option value="Pulau Pinang">Pulau Pinang</option>
-    <option value="Perak">Perak</option>
-    <option value="Perlis">Perlis</option>
-    <option value="Sabah">Sabah</option>
-    <option value="Sarawak">Sarawak</option>
-    <option value="Selangor">Selangor</option>
-    <option value="Terengganu">Terengganu</option>
-    <option value="W.P. Kuala Lumpur">W.P. Kuala Lumpur</option>
-    <option value="W.P. Putrajaya">W.P. Putrajaya</option>
-    <option value="W.P. Labuan">W.P. Labuan</option>
+    <option value="">-- SELECT STATE --</option>
+    <option value="Johor">JOHOR</option>
+    <option value="Kedah">KEDAH</option>
+    <option value="Kelantan">KELANTAN</option>
+    <option value="Melaka">MELAKA</option>
+    <option value="Negeri Sembilan">NEGERI SEMBILAN</option>
+    <option value="Pahang">PAHANG</option>
+    <option value="Pulau Pinang">PULAU PINANG</option>
+    <option value="Perak">PERAK</option>
+    <option value="Perlis">PERLIS</option>
+    <option value="Sabah">SABAH</option>
+    <option value="Sarawak">SARAWAK</option>
+    <option value="Selangor">SELANGOR</option>
+    <option value="Terengganu">TERENGGANU</option>
+    <option value="W.P. Kuala Lumpur">W.P. KUALA LUMPUR</option>
+    <option value="W.P. Putrajaya">W.P. PUTRAJAYA</option>
+    <option value="W.P. Labuan">W.P. LABUAN</option>
 </select>
 
-    <label>5. Station Code</label>
+    <label>5. STATION CODE</label>
     <input type="text" id="station_code">
 
-    <label>6. Contract Account No.</label>
+    <label>6. CONTRACT ACCOUNT NO.</label>
     <input type="text" id="contract_account_no">
 
-    <label>7. Customer Name</label>
+    <label>7. CUSTOMER NAME</label>
     <input type="text" id="customer_name">
 
-    <label>8. Customer Type</label>
+    <label>8. CUSTOMER TYPE</label>
     <input type="text" id="customer_type">
 
-    <label>9. Tariff</label>
+    <label>9. TARIFF</label>
     <input type="text" id="tariff">
 
-    <label>10. Premise Address</label>
+    <label>10. PREMISE ADDRESS</label>
     <textarea id="premise_address"></textarea>
 
-    <label>11. Anomaly (Type)</label>
+    <label>11. ANOMALY (TYPE)</label>
     <input type="text" id="anomaly_type">
 
-    <label>12. Installation No.</label>
+    <label>12. INSTALLATION NO.</label>
     <input type="text" id="installation_no">
 
-    <label>13. GPS Coordinate</label>
-    <input type="text" id="gps_coordinate" placeholder="lat, long">
+    <label>13. GPS COORDINATE</label>
+    <input type="text" id="gps_coordinate" placeholder="LAT, LONG">
 
-    <label>14. Manufact No.</label>
+    <label>14. MANUFACT NO.</label>
     <input type="text" id="manufact_no">
 
-    <label>15. Meter Brand</label>
+    <label>15. METER BRAND</label>
     <input type="text" id="meter_brand">
 
-    <label>16. Meter Description</label>
+    <label>16. METER DESCRIPTION</label>
     <input type="text" id="meter_description">
 
-    <label>17. CT Ratio</label>
+    <label>17. CT RATIO</label>
     <input type="text" id="ct_ratio">
 
-    <label>18. Meter Installation Date</label>
+    <label>18. METER INSTALLATION DATE</label>
     <input type="date" id="meter_installation_date">
 
-    <label>19. Error</label>
+    <label>19. ERROR</label>
     <input type="text" id="error_field">
 
-    <label>20. Testing Method</label>
+    <label>20. TESTING METHOD</label>
     <input type="text" id="testing_method">
 
-    <label>21. Technical Action</label>
+    <label>21. TECHNICAL ACTION</label>
     <input type="text" id="technical_action">
 
-    <label>22. Replace Meter Manufact No.</label>
+    <label>22. REPLACE METER MANUFACT NO.</label>
     <input type="text" id="replace_manufact_no">
 
-    <label>23. Replace Meter Brand</label>
+    <label>23. REPLACE METER BRAND</label>
     <input type="text" id="replace_meter_brand">
 
-    <label>24. Meter Category</label>
+    <label>24. METER CATEGORY</label>
     <input type="text" id="meter_category">
 
-    <label>25. Remarks</label>
+    <label>25. REMARKS</label>
     <textarea id="remarks"></textarea>
 
-    <label>26. Jenis Premis</label>
+    <label>26. JENIS PREMIS</label>
     <input type="text" id="jenis_premis">
 
-    <label>27. Cause</label>
+    <label>27. CAUSE</label>
     <input type="text" id="cause">
 
-    <label>28. Action Camera</label>
+    <label>28. ACTION CAMERA</label>
     <input type="text" id="action_camera">
 
-    <label>29. Service Request ID</label>
+    <label>29. SERVICE REQUEST ID</label>
     <input type="text" id="service_request_id">
 
-    <label>30. Project Type</label>
+    <label>30. PROJECT TYPE</label>
     <input type="text" id="project_type">
 
     <label>31. HRC</label>
     <input type="text" id="hrc">
 
-    <label>32. Meter Send To Lab</label>
+    <label>32. METER SEND TO LAB</label>
     <input type="text" id="meter_send_to_lab">
 
-    <label>33. Meter Changed Status</label>
+    <label>33. METER CHANGED STATUS</label>
     <input type="text" id="meter_changed_status">
 
-    <label>34. No Of Team</label>
+    <label>34. NO OF TEAM</label>
     <input type="number" id="no_of_team" min="0">
 
-    <label>35. Team Leader</label>
+    <label>35. TEAM LEADER</label>
     <input type="text" id="team_leader">
 
-    <label>36. Team Member 1</label>
+    <label>36. TEAM MEMBER 1</label>
     <input type="text" id="team_member_1">
 
-    <label>37. Team Member 2</label>
+    <label>37. TEAM MEMBER 2</label>
     <input type="text" id="team_member_2">
 
-    <label>38. Team Member 3</label>
+    <label>38. TEAM MEMBER 3</label>
     <input type="text" id="team_member_3">
 
-    <label>39. Case ID No</label>
+    <label>39. CASE ID NO</label>
     <input type="text" id="case_id_no">
 
-    <label>40. Service Notification (S/N) No</label>
+    <label>40. SERVICE NOTIFICATION (S/N) NO</label>
     <input type="text" id="service_notification_no">
 
-    <label>41. Inspection Result</label>
+    <label>41. INSPECTION RESULT</label>
     <input type="text" id="inspection_result">
 
-    <label>42. Disconnection Date</label>
+    <label>42. DISCONNECTION DATE</label>
     <input type="date" id="disconnection_date">
 
-    <label>43. Status</label>
+    <label>43. STATUS</label>
     <input type="text" id="status_field">
 
-    <label>44. Testing Method (Remarks)</label>
+    <label>44. TESTING METHOD (REMARKS)</label>
     <textarea id="testing_method_remarks"></textarea>
 
     <div class="buttons">
-        <button onclick="saveEntry()">Save Entry</button>
-        <button onclick="downloadExcel()">Download Excel</button>
-        <button onclick="clearSaved()">Clear Saved List</button>
+        <button onclick="saveEntry()">SAVE ENTRY</button>
+        <button onclick="downloadExcel()">DOWNLOAD EXCEL</button>
+        <button onclick="clearSaved()">CLEAR SAVED LIST</button>
     </div>
 </div>
 
-<h3>Data Saved:</h3>
+<h3>DATA SAVED:</h3>
 <div id="savedList"></div>
 
 <script>
@@ -370,7 +370,13 @@ function readForm() {
     const obj = {};
     fieldIds.forEach(id => {
         const el = document.getElementById(id);
-        obj[id] = el ? el.value : "";
+        let value = el ? el.value : "";
+        
+        // Simpan nilai dalam huruf besar untuk memastikan konsistensi data
+        if (typeof value === 'string') {
+            value = value.toUpperCase();
+        }
+        obj[id] = value;
     });
     return obj;
 }
@@ -379,7 +385,15 @@ function readForm() {
 function writeForm(obj) {
     fieldIds.forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.value = obj[id] || "";
+        // Pastikan tarikh kekal dalam format yang betul untuk input[type="date"]
+        if (el) {
+            if (el.type === 'date' || el.type === 'time') {
+                 el.value = obj[id] || "";
+            } else {
+                 // Apabila mengisi borang, pastikan data yang disimpan (yang kini adalah UPPERCASE) dipaparkan
+                 el.value = obj[id] || "";
+            }
+        }
     });
 }
 
@@ -440,10 +454,10 @@ function renderList() {
             <div class="row-header" onclick="toggleDetails(${i})">
                 <div class="row-left">
                     <span class="arrow" id="arrow_${i}">▶</span>
-                    <div><b>${escapeHtml(e.no || String(i+1))}</b> — ${escapeHtml(e.customer_name || "(no name)")}</div>
+                    <div><b>${escapeHtml(e.no || String(i+1))}</b> — ${escapeHtml(e.customer_name || "(NO NAME)")}</div>
                 </div>
                 <div>
-                    <button class="edit-btn" onclick="event.stopPropagation(); editEntry(${i});">Edit</button>
+                    <button class="edit-btn" onclick="event.stopPropagation(); editEntry(${i});">EDIT</button>
                 </div>
             </div>
 
@@ -460,52 +474,52 @@ function renderList() {
 /* --- mapping id -> readable label (keeps original order) --- */
 function getLabelById(id) {
     const labels = {
-        "inspection_date":"Inspection Date",
-        "inspection_time":"Inspection Time",
-        "notis_date":"Tarikh Serahan Notis Pemotongan",
-        "state":"State",
-        "station_code":"Station Code",
-        "contract_account_no":"Contract Account No.",
-        "customer_name":"Customer Name",
-        "customer_type":"Customer Type",
-        "tariff":"Tariff",
-        "premise_address":"Premise Address",
-        "anomaly_type":"Anomaly (Type)",
-        "installation_no":"Installation No.",
-        "gps_coordinate":"GPS Coordinate",
-        "manufact_no":"Manufact No.",
-        "meter_brand":"Meter Brand",
-        "meter_description":"Meter Description",
-        "ct_ratio":"CT Ratio",
-        "meter_installation_date":"Meter Installation Date",
-        "error_field":"Error",
-        "testing_method":"Testing Method",
-        "technical_action":"Technical Action",
-        "replace_manufact_no":"Replace Meter Manufact No.",
-        "replace_meter_brand":"Replace Meter Brand",
-        "meter_category":"Meter Category",
-        "remarks":"Remarks",
-        "jenis_premis":"Jenis Premis",
-        "cause":"Cause",
-        "action_camera":"Action Camera",
-        "service_request_id":"Service Request ID",
-        "project_type":"Project Type",
+        "inspection_date":"INSPECTION DATE",
+        "inspection_time":"INSPECTION TIME",
+        "notis_date":"TARIKH SERAHAN NOTIS PEMOTONGAN",
+        "state":"STATE",
+        "station_code":"STATION CODE",
+        "contract_account_no":"CONTRACT ACCOUNT NO.",
+        "customer_name":"CUSTOMER NAME",
+        "customer_type":"CUSTOMER TYPE",
+        "tariff":"TARIFF",
+        "premise_address":"PREMISE ADDRESS",
+        "anomaly_type":"ANOMALY (TYPE)",
+        "installation_no":"INSTALLATION NO.",
+        "gps_coordinate":"GPS COORDINATE",
+        "manufact_no":"MANUFACT NO.",
+        "meter_brand":"METER BRAND",
+        "meter_description":"METER DESCRIPTION",
+        "ct_ratio":"CT RATIO",
+        "meter_installation_date":"METER INSTALLATION DATE",
+        "error_field":"ERROR",
+        "testing_method":"TESTING METHOD",
+        "technical_action":"TECHNICAL ACTION",
+        "replace_manufact_no":"REPLACE METER MANUFACT NO.",
+        "replace_meter_brand":"REPLACE METER BRAND",
+        "meter_category":"METER CATEGORY",
+        "remarks":"REMARKS",
+        "jenis_premis":"JENIS PREMIS",
+        "cause":"CAUSE",
+        "action_camera":"ACTION CAMERA",
+        "service_request_id":"SERVICE REQUEST ID",
+        "project_type":"PROJECT TYPE",
         "hrc":"HRC",
-        "meter_send_to_lab":"Meter Send To Lab",
-        "meter_changed_status":"Meter Changed Status",
-        "no_of_team":"No Of Team",
-        "team_leader":"Team Leader",
-        "team_member_1":"Team Member 1",
-        "team_member_2":"Team Member 2",
-        "team_member_3":"Team Member 3",
-        "case_id_no":"Case ID No",
-        "service_notification_no":"Service Notification (S/N) No",
-        "inspection_result":"Inspection Result",
-        "disconnection_date":"Disconnection Date",
-        "status_field":"Status",
-        "testing_method_remarks":"Testing Method (Remarks)"
+        "meter_send_to_lab":"METER SEND TO LAB",
+        "meter_changed_status":"METER CHANGED STATUS",
+        "no_of_team":"NO OF TEAM",
+        "team_leader":"TEAM LEADER",
+        "team_member_1":"TEAM MEMBER 1",
+        "team_member_2":"TEAM MEMBER 2",
+        "team_member_3":"TEAM MEMBER 3",
+        "case_id_no":"CASE ID NO",
+        "service_notification_no":"SERVICE NOTIFICATION (S/N) NO",
+        "inspection_result":"INSPECTION RESULT",
+        "disconnection_date":"DISCONNECTION DATE",
+        "status_field":"STATUS",
+        "testing_method_remarks":"TESTING METHOD (REMARKS)"
     };
-    return labels[id] || id;
+    return labels[id] || id.toUpperCase();
 }
 
 /* --- toggle expand / collapse details --- */
@@ -536,7 +550,7 @@ function editEntry(index) {
 
 /* --- clear saved entries --- */
 function clearSaved() {
-    if (!confirm("Clear all saved entries?")) return;
+    if (!confirm("CLEAR ALL SAVED ENTRIES?")) return;
     entries = [];
     localStorage.removeItem("inspection_data_45");
     renderList();
@@ -548,64 +562,65 @@ function downloadExcel() {
 
     // Headers in the same order as you requested (1..45)
     const headers = [
-      "No",
-      "Inspection Date",
-      "Inspection Time",
-      "Tarikh Serahan Notis Pemotongan",
-      "State",
-      "Station Code",
-      "Contract Account No.",
-      "Customer Name",
-      "Customer Type",
-      "Tariff",
-      "Premise Address",
-      "Anomaly (Type)",
-      "Installation No.",
-      "GPS Coordinate",
-      "Manufact No.",
-      "Meter Brand",
-      "Meter Description",
-      "CT Ratio",
-      "Meter Installation Date",
-      "Error",
-      "Testing Method",
-      "Technical Action",
-      "Replace Meter Manufact No.",
-      "Replace Meter Brand",
-      "Meter Category",
-      "Remarks",
-      "Jenis Premis",
-      "Cause",
-      "Action Camera",
-      "Service Request ID",
-      "Project Type",
+      "NO",
+      "INSPECTION DATE",
+      "INSPECTION TIME",
+      "TARIKH SERAHAN NOTIS PEMOTONGAN",
+      "STATE",
+      "STATION CODE",
+      "CONTRACT ACCOUNT NO.",
+      "CUSTOMER NAME",
+      "CUSTOMER TYPE",
+      "TARIFF",
+      "PREMISE ADDRESS",
+      "ANOMALY (TYPE)",
+      "INSTALLATION NO.",
+      "GPS COORDINATE",
+      "MANUFACT NO.",
+      "METER BRAND",
+      "METER DESCRIPTION",
+      "CT RATIO",
+      "METER INSTALLATION DATE",
+      "ERROR",
+      "TESTING METHOD",
+      "TECHNICAL ACTION",
+      "REPLACE METER MANUFACT NO.",
+      "REPLACE METER BRAND",
+      "METER CATEGORY",
+      "REMARKS",
+      "JENIS PREMIS",
+      "CAUSE",
+      "ACTION CAMERA",
+      "SERVICE REQUEST ID",
+      "PROJECT TYPE",
       "HRC",
-      "Meter Send To Lab",
-      "Meter Changed Status",
-      "No Of Team",
-      "Team Leader",
-      "Team Member 1",
-      "Team Member 2",
-      "Team Member 3",
-      "Case ID No",
-      "Service Notification (S/N) No",
-      "Inspection Result",
-      "Disconnection Date",
-      "Status",
-      "Testing Method (Remarks)"
+      "METER SEND TO LAB",
+      "METER CHANGED STATUS",
+      "NO OF TEAM",
+      "TEAM LEADER",
+      "TEAM MEMBER 1",
+      "TEAM MEMBER 2",
+      "TEAM MEMBER 3",
+      "CASE ID NO",
+      "SERVICE NOTIFICATION (S/N) NO",
+      "INSPECTION RESULT",
+      "DISCONNECTION DATE",
+      "STATUS",
+      "TESTING METHOD (REMARKS)"
     ];
 
     const ws_data = [headers];
 
     entries.forEach(e => {
+        // Data is already stored in uppercase due to readForm modification
         const row = fieldIds.map(id => e[id] !== undefined ? e[id] : "");
         ws_data.push(row);
     });
 
     const ws = XLSX.utils.aoa_to_sheet(ws_data);
     ws["!ref"] = "A1:" + XLSX.utils.encode_cell({ c: headers.length - 1, r: ws_data.length - 1 });
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-    XLSX.writeFile(wb, "inspection_data_45.xlsx");
+    XLSX.utils.book_append_sheet(wb, ws, "SHEET1");
+    XLSX.writeFile(wb, "INSPECTION_DATA_45.XLSX");
 }
 
 /* --- utility: escape HTML to avoid injection in display (safe) --- */
